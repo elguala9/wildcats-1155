@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
+    },
+    "file":[
+        "Wildcats1155.ts"
+    ]
+  }

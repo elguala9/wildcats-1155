@@ -1,0 +1,25 @@
+{
+  "name": "wildcats-1155",
+  "version": "1.0.0",
+  "description": "Library for Panthers and Lions",
+  "main": "Wildcats1155.js",
+  "scripts": {
+    "test": "tsc && ts-node ./test.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elguala9/wildcats-1155.git"
+  },
+  "author": "Luca Gualandi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/elguala9/wildcats-1155/issues"
+  },
+  "homepage": "https://github.com/elguala9/wildcats-1155#readme",
+  "dependencies": {
+    "web3": "^1.7.3"
+  },
+  "devDependencies": {
+    "moralis": "^1.7.0"
+  }
+}
