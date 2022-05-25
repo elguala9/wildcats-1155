@@ -88,8 +88,7 @@ export class Wildcats1155{
       return  this.GWEI + baseFee - 1; // less than 
     }
 
-
-
+    
     private _getAddress(args: string[]){
       if(args.length > 1)
         throw "Too much argument";
@@ -118,17 +117,25 @@ export class Wildcats1155{
       return nfts
     }
 
-    
 
-     
+    public async getEstimatedGas(set : number, amount : number) {
+      return await this.smart_contract.methods
+      .mintSociable(set, amount)
+      .estimateGas({from: this.account})
+      /*.then(function (estimate) {
+        console.log("Estimated gas to execute mint: ", estimate);
+      })*/;
+    }
+
+        
     public async mint(set : number, amount : number){
       let config =  {
-          gas: await this.getGasLimit(),
+          gas: await this.getEstimatedGas(set, amount),
           //gasPrice: await this.getGasPrice(),
           from : this.account,
           value: await this.getPrice(set),
-          maxFeePerGas: this.GWEI,
-          maxPriorityFeePerGas: await this.getMaxPriorityFeePerGas()
+          maxFeePerGas: await this.getMaxPriorityFeePerGas(),
+          maxPriorityFeePerGas: this.GWEI
       }
       
       switch(this.collection){

@@ -180,6 +180,24 @@ var Wildcats1155 = /** @class */ (function () {
             });
         });
     };
+    Wildcats1155.prototype.getEstimatedGas = function (set, amount) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.smart_contract.methods
+                            .mintSociable(set, amount)
+                            .estimateGas({ from: this.account })
+                        /*.then(function (estimate) {
+                          console.log("Estimated gas to execute mint: ", estimate);
+                        })*/ ];
+                    case 1: return [2 /*return*/, _a.sent()
+                        /*.then(function (estimate) {
+                          console.log("Estimated gas to execute mint: ", estimate);
+                        })*/ ];
+                }
+            });
+        });
+    };
     Wildcats1155.prototype.mint = function (set, amount) {
         return __awaiter(this, void 0, void 0, function () {
             var config;
@@ -188,18 +206,18 @@ var Wildcats1155 = /** @class */ (function () {
                 switch (_b.label) {
                     case 0:
                         _a = {};
-                        return [4 /*yield*/, this.getGasLimit()];
+                        return [4 /*yield*/, this.getEstimatedGas(set, amount)];
                     case 1:
                         _a.gas = _b.sent(),
                             //gasPrice: await this.getGasPrice(),
                             _a.from = this.account;
                         return [4 /*yield*/, this.getPrice(set)];
                     case 2:
-                        _a.value = _b.sent(),
-                            _a.maxFeePerGas = this.GWEI;
+                        _a.value = _b.sent();
                         return [4 /*yield*/, this.getMaxPriorityFeePerGas()];
                     case 3:
-                        config = (_a.maxPriorityFeePerGas = _b.sent(),
+                        config = (_a.maxFeePerGas = _b.sent(),
+                            _a.maxPriorityFeePerGas = this.GWEI,
                             _a);
                         switch (this.collection) {
                             case "SOCIABLE":
