@@ -126,11 +126,11 @@ export class Wildcats1155{
           this.smart_contract.methods
           .mintSociable(set, amount)
           .send({
-            /*gas: await this.getGasLimit(),
-            gasPrice: await this.getGasPrice(),*/
-            from : this.account,
-            value: await this.getPrice(set)
-        })
+            gasLimit: String(285000),
+            to: this.contract_address,
+            from: this.account,
+            value: await this.getPrice(set),
+          })
           .once("error", (err : any) => {
             console.log(err);
             return "Sorry, something went wrong please try again later.";
