@@ -73,6 +73,10 @@ export class Wildcats1155{
       return (await this.getSet(set)).price;
     }
 
+    public async getGasLimit() : Promise<number> {
+      return (await this.web3.eth.getBlock("latest")).gasLimit;
+    }
+
 
     private _getAddress(args: string[]){
       if(args.length > 1)
@@ -107,7 +111,7 @@ export class Wildcats1155{
      
     public async mint(set : number, amount : number){
       let config =  {
-          gasLimit: (await this.web3.eth.getBlock("latest")).gasLimit,
+          gasLimit: await this.getGasLimit(),
           to: this.contract_address ,
           from : this.account,
           value: await this.getPrice(set)
