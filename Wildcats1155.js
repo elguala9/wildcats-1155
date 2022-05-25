@@ -108,6 +108,16 @@ var Wildcats1155 = /** @class */ (function () {
             });
         });
     };
+    Wildcats1155.prototype.getGasPrice = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.web3.eth.getBlock("latest")];
+                    case 1: return [2 /*return*/, (_a.sent()).gasUsed];
+                }
+            });
+        });
+    };
     Wildcats1155.prototype._getAddress = function (args) {
         if (args.length > 1)
             throw "Too much argument";
@@ -165,11 +175,14 @@ var Wildcats1155 = /** @class */ (function () {
                         _a = {};
                         return [4 /*yield*/, this.getGasLimit()];
                     case 1:
-                        _a.gasLimit = _b.sent(),
+                        _a.gas = _b.sent();
+                        return [4 /*yield*/, this.getGasLimit()];
+                    case 2:
+                        _a.gasPrice = _b.sent(),
                             _a.to = this.contract_address,
                             _a.from = this.account;
                         return [4 /*yield*/, this.getPrice(set)];
-                    case 2:
+                    case 3:
                         config = (_a.value = _b.sent(),
                             _a);
                         switch (this.collection) {
