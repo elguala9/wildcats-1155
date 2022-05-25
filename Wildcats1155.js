@@ -128,7 +128,6 @@ var Wildcats1155 = /** @class */ (function () {
                     case 1:
                         block = _a.sent();
                         baseFee = Number(block.baseFeePerGas);
-                        console.log(baseFee);
                         return [2 /*return*/, this.GWEI + baseFee - 1]; // less than 
                 }
             });
@@ -196,12 +195,12 @@ var Wildcats1155 = /** @class */ (function () {
                             _a.from = this.account;
                         return [4 /*yield*/, this.getPrice(set)];
                     case 2:
-                        config = (_a.value = _b.sent(),
-                            _a.maxFeePerGas = this.GWEI,
-                            _a.maxPriorityFeePerGas = this.getMaxPriorityFeePerGas(),
+                        _a.value = _b.sent(),
+                            _a.maxFeePerGas = this.GWEI;
+                        return [4 /*yield*/, this.getMaxPriorityFeePerGas()];
+                    case 3:
+                        config = (_a.maxPriorityFeePerGas = _b.sent(),
                             _a);
-                        console.log("maxFeePerGas: " + config.maxFeePerGas);
-                        console.log("maxPriorityFeePerGas: " + config.maxPriorityFeePerGas);
                         switch (this.collection) {
                             case "SOCIABLE":
                                 this.smart_contract.methods
