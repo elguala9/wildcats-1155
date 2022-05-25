@@ -85,7 +85,7 @@ export class Wildcats1155{
     public async getMaxPriorityFeePerGas() : Promise<number> {
       let block = await this.web3.eth.getBlock("pending");
       let baseFee = Number(block.baseFeePerGas);
-      return  Number(this.GWEI) + baseFee - 1; // less than 
+      return  this.GWEI + baseFee - 1; // less than 
     }
 
 
@@ -128,7 +128,7 @@ export class Wildcats1155{
           from : this.account,
           value: await this.getPrice(set),
           maxFeePerGas: this.GWEI,
-          maxPriorityFeePerGas: this.getMaxPriorityFeePerGas()
+          maxPriorityFeePerGas: await this.getMaxPriorityFeePerGas()
       }
       
       switch(this.collection){
