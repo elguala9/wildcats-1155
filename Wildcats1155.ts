@@ -114,19 +114,23 @@ export class Wildcats1155{
 
      
     public async mint(set : number, amount : number){
-      let config =  {
+      /*let config =  {
           gas: await this.getGasLimit(),
           gasPrice: await this.getGasPrice(),
-          to: this.contract_address ,
           from : this.account,
           value: await this.getPrice(set)
-      }
+      }*/
       
       switch(this.collection){
         case "SOCIABLE" :
           this.smart_contract.methods
           .mintSociable(set, amount)
-          .send(config)
+          .send({
+            gas: await this.getGasLimit(),
+            gasPrice: await this.getGasPrice(),
+            from : this.account,
+            value: await this.getPrice(set)
+        })
           .once("error", (err : any) => {
             console.log(err);
             return "Sorry, something went wrong please try again later.";
@@ -139,7 +143,12 @@ export class Wildcats1155{
         case "PARTY" :
           this.smart_contract.methods
           .mintParty(set, amount)
-          .send(config)
+          .send({
+            gas: await this.getGasLimit(),
+            gasPrice: await this.getGasPrice(),
+            from : this.account,
+            value: await this.getPrice(set)
+        })
           .once("error", (err : any) => {
             console.log(err);
             return "Sorry, something went wrong please try again later.";
