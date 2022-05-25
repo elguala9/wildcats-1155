@@ -126,8 +126,8 @@ export class Wildcats1155{
           this.smart_contract.methods
           .mintSociable(set, amount)
           .send({
-            gas: await this.getGasLimit(),
-            gasPrice: await this.getGasPrice(),
+            /*gas: await this.getGasLimit(),
+            gasPrice: await this.getGasPrice(),*/
             from : this.account,
             value: await this.getPrice(set)
         })

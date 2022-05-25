@@ -167,55 +167,67 @@ var Wildcats1155 = /** @class */ (function () {
     };
     Wildcats1155.prototype.mint = function (set, amount) {
         return __awaiter(this, void 0, void 0, function () {
-            var config;
-            var _a;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
+            var _a, _b, _c, _d, _e;
+            var _f, _g;
+            return __generator(this, function (_h) {
+                switch (_h.label) {
                     case 0:
-                        _a = {};
-                        return [4 /*yield*/, this.getGasLimit()];
+                        _a = this.collection;
+                        switch (_a) {
+                            case "SOCIABLE": return [3 /*break*/, 1];
+                            case "PARTY": return [3 /*break*/, 5];
+                        }
+                        return [3 /*break*/, 9];
                     case 1:
-                        _a.gas = _b.sent();
+                        _c = (_b = this.smart_contract.methods
+                            .mintSociable(set, amount))
+                            .send;
+                        _f = {};
                         return [4 /*yield*/, this.getGasLimit()];
                     case 2:
-                        _a.gasPrice = _b.sent(),
-                            _a.to = this.contract_address,
-                            _a.from = this.account;
-                        return [4 /*yield*/, this.getPrice(set)];
+                        _f.gas = _h.sent();
+                        return [4 /*yield*/, this.getGasPrice()];
                     case 3:
-                        config = (_a.value = _b.sent(),
-                            _a);
-                        switch (this.collection) {
-                            case "SOCIABLE":
-                                this.smart_contract.methods
-                                    .mintSociable(set, amount)
-                                    .send(config)
-                                    .once("error", function (err) {
-                                    console.log(err);
-                                    return "Sorry, something went wrong please try again later.";
-                                })
-                                    .then(function (receipt) {
-                                    return receipt;
-                                });
-                                break;
-                            //-------------
-                            case "PARTY":
-                                this.smart_contract.methods
-                                    .mintParty(set, amount)
-                                    .send(config)
-                                    .once("error", function (err) {
-                                    console.log(err);
-                                    return "Sorry, something went wrong please try again later.";
-                                })
-                                    .then(function (receipt) {
-                                    return receipt;
-                                });
-                                break;
-                            default:
-                                throw ("This collection do not exist");
-                                break;
-                        }
-                        return [2 /*return*/];
+                        _f.gasPrice = _h.sent(),
+                            _f.from = this.account;
+                        return [4 /*yield*/, this.getPrice(set)];
+                    case 4:
+                        _c.apply(_b, [(_f.value = _h.sent(),
+                                _f)])
+                            .once("error", function (err) {
+                            console.log(err);
+                            return "Sorry, something went wrong please try again later.";
+                        })
+                            .then(function (receipt) {
+                            return receipt;
+                        });
+                        return [3 /*break*/, 10];
+                    case 5:
+                        _e = (_d = this.smart_contract.methods
+                            .mintParty(set, amount))
+                            .send;
+                        _g = {};
+                        return [4 /*yield*/, this.getGasLimit()];
+                    case 6:
+                        _g.gas = _h.sent();
+                        return [4 /*yield*/, this.getGasPrice()];
+                    case 7:
+                        _g.gasPrice = _h.sent(),
+                            _g.from = this.account;
+                        return [4 /*yield*/, this.getPrice(set)];
+                    case 8:
+                        _e.apply(_d, [(_g.value = _h.sent(),
+                                _g)])
+                            .once("error", function (err) {
+                            console.log(err);
+                            return "Sorry, something went wrong please try again later.";
+                        })
+                            .then(function (receipt) {
+                            return receipt;
+                        });
+                        return [3 /*break*/, 10];
+                    case 9: throw ("This collection do not exist");
+                    case 10: return [2 /*return*/];
                 }
             });
         });
