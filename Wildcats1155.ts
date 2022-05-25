@@ -18,6 +18,7 @@ export class Wildcats1155{
     private account : string;
     private contract_address : string;
     private collection : string;
+    private GWEI : number = 1000000000;
 
     constructor(provider : any, account : string, chain_id : string, collection : string){      
       if(collection != "SOCIABLE" && collection != "PARTY"){
@@ -81,6 +82,13 @@ export class Wildcats1155{
       return  (await this.web3.eth.getBlock("latest")).gasUsed;
     }
 
+    public async getMaxPriorityFeePerGas() : Promise<number> {
+      let block = await this.web3.eth.getBlock("pending");
+      let baseFee = Number(block.baseFeePerGas);
+      return  Number(this.GWEI) + baseFee - 1; // less than 
+    }
+
+
 
     private _getAddress(args: string[]){
       if(args.length > 1)
@@ -114,23 +122,20 @@ export class Wildcats1155{
 
      
     public async mint(set : number, amount : number){
-      /*let config =  {
+      let config =  {
           gas: await this.getGasLimit(),
-          gasPrice: await this.getGasPrice(),
+          //gasPrice: await this.getGasPrice(),
           from : this.account,
-          value: await this.getPrice(set)
-      }*/
+          value: await this.getPrice(set),
+          maxFeePerGas: this.GWEI,
+          maxPriorityFeePerGas: this.getMaxPriorityFeePerGas()
+      }
       
       switch(this.collection){
         case "SOCIABLE" :
           this.smart_contract.methods
           .mintSociable(set, amount)
-          .send({
-            gasLimit: String(285000),
-            to: this.contract_address,
-            from: this.account,
-            value: await this.getPrice(set),
-          })
+          .send(config)
           .once("error", (err : any) => {
             console.log(err);
             return "Sorry, something went wrong please try again later.";
@@ -143,12 +148,7 @@ export class Wildcats1155{
         case "PARTY" :
           this.smart_contract.methods
           .mintParty(set, amount)
-          .send({
-            gas: await this.getGasLimit(),
-            gasPrice: await this.getGasPrice(),
-            from : this.account,
-            value: await this.getPrice(set)
-        })
+          .send(config)
           .once("error", (err : any) => {
             console.log(err);
             return "Sorry, something went wrong please try again later.";
