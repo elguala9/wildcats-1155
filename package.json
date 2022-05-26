@@ -1,9 +1,10 @@
 {
   "name": "wildcats-1155",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "Library for Panthers and Lions",
   "main": "Wildcats1155.js",
   "scripts": {
+    "compile": "tsc -b tsconfig.json",
     "test": "tsc && ts-node ./test.ts"
   },
   "repository": {

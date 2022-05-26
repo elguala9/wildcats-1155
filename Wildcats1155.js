@@ -38,7 +38,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.Wildcats1155 = void 0;
 var web3_1 = __importDefault(require("web3"));
 var config_json_1 = __importDefault(require("./config.json"));
@@ -49,11 +49,11 @@ var Wildcats1155 = /** @class */ (function () {
         if (collection != "SOCIABLE" && collection != "PARTY") {
             throw ("Collection not correct");
         }
-        this.web3 = new web3_1["default"](provider);
+        this.web3 = new web3_1.default(provider);
         this.account = account;
         this.collection = collection;
-        this.contract_address = config_json_1["default"]["CONTRACT_ADDRESS_" + collection + "_" + chain_id];
-        this.smart_contract = new this.web3.eth.Contract(abi_json_1["default"], this.contract_address);
+        this.contract_address = config_json_1.default["CONTRACT_ADDRESS_" + collection + "_" + chain_id];
+        this.smart_contract = new this.web3.eth.Contract(abi_json_1.default, this.contract_address);
     }
     Wildcats1155.prototype.getContractAddress = function () {
         return this.contract_address;
@@ -121,14 +121,14 @@ var Wildcats1155 = /** @class */ (function () {
     };
     Wildcats1155.prototype.getmaxFeePerGas = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var block, baseFee;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.web3.eth.getBlock("pending")];
-                    case 1:
-                        block = _a.sent();
-                        baseFee = Number(block.baseFeePerGas);
-                        return [2 /*return*/, this.GWEI + baseFee - 1]; // less than 
+            var _a;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        ;
+                        _a = this.GWEI;
+                        return [4 /*yield*/, this.getBaseFee()];
+                    case 1: return [2 /*return*/, _a + (_b.sent()) - 1]; // less than 
                 }
             });
         });
@@ -218,17 +218,15 @@ var Wildcats1155 = /** @class */ (function () {
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
-                        _a = {};
-                        return [4 /*yield*/, this.getEstimatedGas(set, amount)];
-                    case 1:
-                        _a.gas = (_b.sent()) * 1.20,
+                        _a = {
+                            //gas: (await this.getEstimatedGas(set, amount))*1.20 ,
                             //gasPrice: await this.getGasPrice(),
-                            _a.from = this.account;
+                            from: this.account
+                        };
                         return [4 /*yield*/, this.getPrice(set)];
-                    case 2:
+                    case 1:
                         config = (_a.value = ((_b.sent()) * amount),
                             _a);
-                        console.log(config.gas);
                         switch (this.collection) {
                             case "SOCIABLE":
                                 this.smart_contract.methods

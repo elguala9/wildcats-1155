@@ -1,5 +1,8 @@
 {
     "compilerOptions": {
+        "target" : "es5",
+        //"module" : "commonts",
+        "declaration" : true,
         "resolveJsonModule": true,
         "esModuleInterop": true,
     },

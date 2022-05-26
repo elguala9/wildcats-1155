@@ -1,6 +1,5 @@
 import Web3 from "web3";
 import { Contract } from 'web3-eth-contract';
-import CONFIG from './config.json'; 
 import ABI from './abi.json'; 
 import { AbiItem } from 'web3-utils'
 
@@ -24,11 +23,18 @@ export class Wildcats1155{
       if(collection != "SOCIABLE" && collection != "PARTY"){
         throw("Collection not correct");
       }
+      if(collection == "SOCIABLE" && chain_id == "1")
+        this.contract_address =  "0x";
+      if(collection == "SOCIABLE" && chain_id == "4")
+        this.contract_address =  "0xB86604A1759A6CBC412101E9022E2c0976b50bd5";
+      if(collection == "PARTY" && chain_id == "1")
+        this.contract_address =  "0x";
+      if(collection == "PARTY" && chain_id == "4")
+        this.contract_address =  "0x";  
 
       this.web3 = new Web3(provider);
       this.account = account;
       this.collection = collection;
-      this.contract_address = CONFIG["CONTRACT_ADDRESS_" + collection + "_" + chain_id];
       this.smart_contract = new this.web3.eth.Contract(ABI as AbiItem[], this.contract_address);
 
         
@@ -74,7 +80,7 @@ export class Wildcats1155{
       return (await this.getSet(set)).price;
     }
 
-    public async getGasLimit() : Promise<number> {
+    /*public async getGasLimit() : Promise<number> {
       return (await this.web3.eth.getBlock("latest")).gasLimit;
     }
 
@@ -89,7 +95,7 @@ export class Wildcats1155{
     public async getBaseFee(){
       let block = await this.web3.eth.getBlock("pending");
       return Number(block.baseFeePerGas);
-    }
+    }*/
 
     
     private _getAddress(args: string[]){
