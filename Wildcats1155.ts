@@ -23,6 +23,8 @@ export class Wildcats1155{
       if(collection != "SOCIABLE" && collection != "PARTY"){
         throw("Collection not correct");
       }
+
+      this.contract_address =  "0x";
       if(collection == "SOCIABLE" && chain_id == "1")
         this.contract_address =  "0x";
       if(collection == "SOCIABLE" && chain_id == "4")
@@ -31,6 +33,9 @@ export class Wildcats1155{
         this.contract_address =  "0x";
       if(collection == "PARTY" && chain_id == "4")
         this.contract_address =  "0x";  
+      
+      if(this.contract_address == "0x")
+        throw("Collection or Chain Id wrong");
 
       this.web3 = new Web3(provider);
       this.account = account;
