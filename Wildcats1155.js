@@ -38,7 +38,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
 exports.Wildcats1155 = void 0;
 var web3_1 = __importDefault(require("web3"));
 var abi_json_1 = __importDefault(require("./abi.json"));
@@ -59,10 +59,10 @@ var Wildcats1155 = /** @class */ (function () {
             this.contract_address = "0x";
         if (this.contract_address == "0x")
             throw ("Collection or Chain Id wrong");
-        this.web3 = new web3_1.default(provider);
+        this.web3 = new web3_1["default"](provider);
         this.account = account;
         this.collection = collection;
-        this.smart_contract = new this.web3.eth.Contract(abi_json_1.default, this.contract_address);
+        this.smart_contract = new this.web3.eth.Contract(abi_json_1["default"], this.contract_address);
     }
     Wildcats1155.prototype.getContractAddress = function () {
         return this.contract_address;
