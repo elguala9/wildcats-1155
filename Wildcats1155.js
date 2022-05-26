@@ -41,7 +41,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Wildcats1155 = void 0;
 var web3_1 = __importDefault(require("web3"));
-var config_json_1 = __importDefault(require("./config.json"));
 var abi_json_1 = __importDefault(require("./abi.json"));
 var Wildcats1155 = /** @class */ (function () {
     function Wildcats1155(provider, account, chain_id, collection) {
@@ -49,10 +48,20 @@ var Wildcats1155 = /** @class */ (function () {
         if (collection != "SOCIABLE" && collection != "PARTY") {
             throw ("Collection not correct");
         }
+        this.contract_address = "0x";
+        if (collection == "SOCIABLE" && chain_id == "1")
+            this.contract_address = "0x";
+        if (collection == "SOCIABLE" && chain_id == "4")
+            this.contract_address = "0xB86604A1759A6CBC412101E9022E2c0976b50bd5";
+        if (collection == "PARTY" && chain_id == "1")
+            this.contract_address = "0x";
+        if (collection == "PARTY" && chain_id == "4")
+            this.contract_address = "0x";
+        if (this.contract_address == "0x")
+            throw ("Collection or Chain Id wrong");
         this.web3 = new web3_1.default(provider);
         this.account = account;
         this.collection = collection;
-        this.contract_address = config_json_1.default["CONTRACT_ADDRESS_" + collection + "_" + chain_id];
         this.smart_contract = new this.web3.eth.Contract(abi_json_1.default, this.contract_address);
     }
     Wildcats1155.prototype.getContractAddress = function () {
@@ -99,53 +108,22 @@ var Wildcats1155 = /** @class */ (function () {
             });
         });
     };
-    Wildcats1155.prototype.getGasLimit = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.web3.eth.getBlock("latest")];
-                    case 1: return [2 /*return*/, (_a.sent()).gasLimit];
-                }
-            });
-        });
-    };
-    Wildcats1155.prototype.getGasPrice = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.web3.eth.getBlock("latest")];
-                    case 1: return [2 /*return*/, (_a.sent()).gasUsed];
-                }
-            });
-        });
-    };
-    Wildcats1155.prototype.getmaxFeePerGas = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var _a;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        ;
-                        _a = this.GWEI;
-                        return [4 /*yield*/, this.getBaseFee()];
-                    case 1: return [2 /*return*/, _a + (_b.sent()) - 1]; // less than 
-                }
-            });
-        });
-    };
-    Wildcats1155.prototype.getBaseFee = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var block;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.web3.eth.getBlock("pending")];
-                    case 1:
-                        block = _a.sent();
-                        return [2 /*return*/, Number(block.baseFeePerGas)];
-                }
-            });
-        });
-    };
+    /*public async getGasLimit() : Promise<number> {
+      return (await this.web3.eth.getBlock("latest")).gasLimit;
+    }
+
+    public async getGasPrice() : Promise<number> {
+      return  (await this.web3.eth.getBlock("latest")).gasUsed;
+    }
+
+    public async getmaxFeePerGas() : Promise<number> {;
+      return  this.GWEI + (await this.getBaseFee()) - 1; // less than
+    }
+
+    public async getBaseFee(){
+      let block = await this.web3.eth.getBlock("pending");
+      return Number(block.baseFeePerGas);
+    }*/
     Wildcats1155.prototype._getAddress = function (args) {
         if (args.length > 1)
             throw "Too much argument";
