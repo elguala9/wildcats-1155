@@ -1,6 +1,6 @@
 {
   "name": "wildcats-1155",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "Library for Panthers and Lions",
   "main": "Wildcats1155.js",
   "scripts": {
@@ -18,7 +18,9 @@
   },
   "homepage": "https://github.com/elguala9/wildcats-1155#readme",
   "dependencies": {
-    "web3": "^1.7.3"
+    "url": "^0.11.0",
+    "web3": "^1.7.3",
+    "xhr2-cookies": "^1.1.0"
   },
   "devDependencies": {
     "moralis": "^1.7.0"
