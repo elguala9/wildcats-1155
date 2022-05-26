@@ -119,7 +119,7 @@ var Wildcats1155 = /** @class */ (function () {
             });
         });
     };
-    Wildcats1155.prototype.getMaxPriorityFeePerGas = function () {
+    Wildcats1155.prototype.getmaxFeePerGas = function () {
         return __awaiter(this, void 0, void 0, function () {
             var block, baseFee;
             return __generator(this, function (_a) {
@@ -129,6 +129,19 @@ var Wildcats1155 = /** @class */ (function () {
                         block = _a.sent();
                         baseFee = Number(block.baseFeePerGas);
                         return [2 /*return*/, this.GWEI + baseFee - 1]; // less than 
+                }
+            });
+        });
+    };
+    Wildcats1155.prototype.getBaseFee = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var block;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.web3.eth.getBlock("pending")];
+                    case 1:
+                        block = _a.sent();
+                        return [2 /*return*/, Number(block.baseFeePerGas)];
                 }
             });
         });
@@ -208,17 +221,14 @@ var Wildcats1155 = /** @class */ (function () {
                         _a = {};
                         return [4 /*yield*/, this.getEstimatedGas(set, amount)];
                     case 1:
-                        _a.gas = _b.sent(),
+                        _a.gas = (_b.sent()) * 1.20,
                             //gasPrice: await this.getGasPrice(),
                             _a.from = this.account;
                         return [4 /*yield*/, this.getPrice(set)];
                     case 2:
-                        _a.value = _b.sent();
-                        return [4 /*yield*/, this.getMaxPriorityFeePerGas()];
-                    case 3:
-                        config = (_a.maxFeePerGas = _b.sent(),
-                            _a.maxPriorityFeePerGas = this.GWEI,
+                        config = (_a.value = ((_b.sent()) * amount),
                             _a);
+                        console.log(config.gas);
                         switch (this.collection) {
                             case "SOCIABLE":
                                 this.smart_contract.methods

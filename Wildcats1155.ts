@@ -82,10 +82,13 @@ export class Wildcats1155{
       return  (await this.web3.eth.getBlock("latest")).gasUsed;
     }
 
-    public async getmaxFeePerGas() : Promise<number> {
+    public async getmaxFeePerGas() : Promise<number> {;
+      return  this.GWEI + (await this.getBaseFee()) - 1; // less than 
+    }
+
+    public async getBaseFee(){
       let block = await this.web3.eth.getBlock("pending");
-      let baseFee = Number(block.baseFeePerGas);
-      return  this.GWEI + baseFee - 1; // less than 
+      return Number(block.baseFeePerGas);
     }
 
     
@@ -125,18 +128,20 @@ export class Wildcats1155{
       /*.then(function (estimate) {
         console.log("Estimated gas to execute mint: ", estimate);
       })*/;
+      
     }
 
         
     public async mint(set : number, amount : number){
       let config =  {
-          gas: await this.getEstimatedGas(set, amount),
+          //gas: (await this.getEstimatedGas(set, amount))*1.20 ,
           //gasPrice: await this.getGasPrice(),
           from : this.account,
-          value: await this.getPrice(set),
+          value: ((await this.getPrice(set)) * amount),
           /*maxFeePerGas: await this.getmaxFeePerGas(),
           maxPriorityFeePerGas: this.GWEI*/
       }
+
       
       switch(this.collection){
         case "SOCIABLE" :
