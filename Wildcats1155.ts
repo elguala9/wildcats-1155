@@ -85,6 +85,10 @@ export class Wildcats1155{
       return (await this.getSet(set)).price;
     }
 
+    public getSmartContractAddress(){
+      return this.contract_address;
+    }
+
     /*public async getGasLimit() : Promise<number> {
       return (await this.web3.eth.getBlock("latest")).gasLimit;
     }
