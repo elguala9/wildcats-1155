@@ -33,6 +33,6 @@ export declare class Wildcats1155 {
     */
     nftsOwned(...args: string[]): Promise<Array<number>>;
     getEstimatedGas(set: number, amount: number): Promise<any>;
-    mint(set: number, amount: number): Promise<void>;
+    mint(set: number, amount: number): Promise<any>;
 }
 export {};

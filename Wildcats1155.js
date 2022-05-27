@@ -218,7 +218,8 @@ var Wildcats1155 = /** @class */ (function () {
                                     return "Sorry, something went wrong please try again later.";
                                 })
                                     .then(function (receipt) {
-                                    return receipt;
+                                    console.log(receipt.blockHash);
+                                    return receipt.blockHash;
                                 });
                                 break;
                             //-------------
@@ -231,7 +232,8 @@ var Wildcats1155 = /** @class */ (function () {
                                     return "Sorry, something went wrong please try again later.";
                                 })
                                     .then(function (receipt) {
-                                    return receipt;
+                                    console.log(receipt.blockHash);
+                                    return receipt.blockHash;
                                 });
                                 break;
                             default:

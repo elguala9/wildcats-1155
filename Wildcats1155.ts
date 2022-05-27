@@ -147,7 +147,7 @@ export class Wildcats1155{
     }
 
         
-    public async mint(set : number, amount : number){
+    public async mint(set : number, amount : number) : Promise<any>{
       let config =  {
           //gas: (await this.getEstimatedGas(set, amount))*1.20 ,
           //gasPrice: await this.getGasPrice(),
@@ -168,7 +168,8 @@ export class Wildcats1155{
             return "Sorry, something went wrong please try again later.";
           })
           .then((receipt : any) => {
-            return receipt;
+            console.log(receipt.blockHash);
+            return receipt.blockHash;
           });
         break;
       //-------------
@@ -181,7 +182,8 @@ export class Wildcats1155{
             return "Sorry, something went wrong please try again later.";
           })
           .then((receipt : any) => {
-            return receipt;
+            console.log(receipt.blockHash);
+            return receipt.blockHash;
           });
         break;
         default :
