@@ -24,6 +24,7 @@ export declare class Wildcats1155 {
     getSmartContract(): Contract;
     getAccount(): string;
     getPrice(set: number): Promise<number>;
+    getSmartContractAddress(): string;
     private _getAddress;
     /**
       * call normalNftOwned(address) method of the smart contract

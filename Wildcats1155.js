@@ -108,6 +108,9 @@ var Wildcats1155 = /** @class */ (function () {
             });
         });
     };
+    Wildcats1155.prototype.getSmartContractAddress = function () {
+        return this.contract_address;
+    };
     /*public async getGasLimit() : Promise<number> {
       return (await this.web3.eth.getBlock("latest")).gasLimit;
     }
