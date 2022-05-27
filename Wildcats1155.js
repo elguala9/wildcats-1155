@@ -56,9 +56,9 @@ var Wildcats1155 = /** @class */ (function () {
         if (collection == "PARTY" && chain_id == "1")
             this.contract_address = "0x";
         if (collection == "PARTY" && chain_id == "4")
-            this.contract_address = "0x";
+            this.contract_address = "0x1E19A2D2c0a29F536dD8e5d433F824aEA782E75b";
         if (this.contract_address == "0x")
-            throw ("Collection or Chain Id wrong");
+            throw ("SmartContract not found");
         this.web3 = new web3_1["default"](provider);
         this.account = account;
         this.collection = collection;
