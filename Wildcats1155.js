@@ -50,11 +50,11 @@ var Wildcats1155 = /** @class */ (function () {
         }
         this.contract_address = "0x";
         if (collection == "SOCIABLE" && chain_id == "1")
-            this.contract_address = "0x";
+            this.contract_address = "0x62A033c2D763a1b1D603A7F32F7b29C9522A651f";
         if (collection == "SOCIABLE" && chain_id == "4")
             this.contract_address = "0xB86604A1759A6CBC412101E9022E2c0976b50bd5";
         if (collection == "PARTY" && chain_id == "1")
-            this.contract_address = "0x";
+            this.contract_address = "0xB3Bc86fcF1BF1111FCE92348a132FB3621ba0d8A";
         if (collection == "PARTY" && chain_id == "4")
             this.contract_address = "0x1E19A2D2c0a29F536dD8e5d433F824aEA782E75b";
         if (this.contract_address == "0x")
