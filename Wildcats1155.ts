@@ -43,8 +43,7 @@ export class Wildcats1155{
       this.collection = collection;
       if(collection == "SOCIABLE")
         this.smart_contract = new this.web3.eth.Contract(ABI_SOC as AbiItem[], this.contract_address);
-        
-      if(collection == "PARTY")
+      else
         this.smart_contract = new this.web3.eth.Contract(ABI_PAR as AbiItem[], this.contract_address);
 
         
