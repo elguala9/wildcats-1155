@@ -41,7 +41,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 exports.__esModule = true;
 exports.Wildcats1155 = void 0;
 var web3_1 = __importDefault(require("web3"));
-var abi_json_1 = __importDefault(require("./abi.json"));
+var abi_soc_json_1 = __importDefault(require("./abi_soc.json"));
+var abi_par_json_1 = __importDefault(require("./abi_par.json"));
 var Wildcats1155 = /** @class */ (function () {
     function Wildcats1155(provider, account, chain_id, collection) {
         this.GWEI = 1000000000;
@@ -62,7 +63,10 @@ var Wildcats1155 = /** @class */ (function () {
         this.web3 = new web3_1["default"](provider);
         this.account = account;
         this.collection = collection;
-        this.smart_contract = new this.web3.eth.Contract(abi_json_1["default"], this.contract_address);
+        if (collection == "SOCIABLE")
+            this.smart_contract = new this.web3.eth.Contract(abi_soc_json_1["default"], this.contract_address);
+        else
+            this.smart_contract = new this.web3.eth.Contract(abi_par_json_1["default"], this.contract_address);
     }
     Wildcats1155.prototype.getContractAddress = function () {
         return this.contract_address;
