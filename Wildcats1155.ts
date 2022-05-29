@@ -1,6 +1,7 @@
 import Web3 from "web3";
 import { Contract } from 'web3-eth-contract';
-import ABI from './abi.json'; 
+import ABI_SOC from './abi_soc.json'; 
+import ABI_PAR from './abi_par.json'; 
 import { AbiItem } from 'web3-utils'
 
 interface structNFT {
@@ -40,7 +41,11 @@ export class Wildcats1155{
       this.web3 = new Web3(provider);
       this.account = account;
       this.collection = collection;
-      this.smart_contract = new this.web3.eth.Contract(ABI as AbiItem[], this.contract_address);
+      if(collection == "SOCIABLE")
+        this.smart_contract = new this.web3.eth.Contract(ABI_SOC as AbiItem[], this.contract_address);
+        
+      if(collection == "PARTY")
+        this.smart_contract = new this.web3.eth.Contract(ABI_PAR as AbiItem[], this.contract_address);
 
         
     }
