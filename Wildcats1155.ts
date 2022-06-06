@@ -26,7 +26,7 @@ export class Wildcats1155{
     private collection : string;
     private endpoint : structEndpoint;
     private chain : "eth" | "rinkeby";
-    private limit : number = 10;
+    private limit : number = 100;
     private null_address : string = "0x0000000000000000000000000000000000000000";
 
     constructor(provider : any, account : string, chain_id : string, collection : string){      
