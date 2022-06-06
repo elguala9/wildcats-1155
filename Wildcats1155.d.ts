@@ -6,18 +6,78 @@ interface structNFT {
     saleIsActive: boolean;
     price: number;
 }
+interface structTransaction {
+    timestamp: string;
+    to_address: string;
+    from_address: string;
+}
 export declare class Wildcats1155 {
     private web3;
     private smart_contract;
     private account;
     private contract_address;
     private collection;
-    private GWEI;
+    private endpoint;
+    private chain;
+    private limit;
     constructor(provider: any, account: string, chain_id: string, collection: string);
+    setMoralis(_serverUrl: string, _appId: string): void;
+    getTransactions(seconds: number, set: number): Promise<number>;
+    getAccountTransactions(set: number): Promise<Array<structTransaction>>;
+    getTransactionsRaw(): Promise<{
+        total: number;
+        page: number;
+        page_size: number;
+        cursor: string;
+        result: {
+            token_address: string;
+            token_id: string;
+            from_address?: string;
+            to_address: string;
+            value?: string;
+            amount?: string;
+            contract_type: string;
+            block_number: string;
+            block_timestamp: string;
+            block_hash: string;
+            transaction_hash: string;
+            transaction_type?: string;
+            transaction_index?: string;
+            log_index: number;
+            operator?: string;
+        }[];
+        block_exists?: boolean;
+        index_complete?: boolean;
+    } & import("moralis/types/generated/web3Api").defaultResponse<{
+        total: number;
+        page: number;
+        page_size: number;
+        cursor: string;
+        result: {
+            token_address: string;
+            token_id: string;
+            from_address?: string;
+            to_address: string;
+            value?: string;
+            amount?: string;
+            contract_type: string;
+            block_number: string;
+            block_timestamp: string;
+            block_hash: string;
+            transaction_hash: string;
+            transaction_type?: string;
+            transaction_index?: string;
+            log_index: number;
+            operator?: string;
+        }[];
+        block_exists?: boolean;
+        index_complete?: boolean;
+    }>>;
+    numberOfAccess(seconds: number, set: number): Promise<number>;
     getContractAddress(): string;
     getCirculation(): any;
     getSet(set: number): Promise<structNFT>;
-    getBalanceOf(address: string, set: number): any;
+    getBalance(set: number): Promise<number>;
     getNumberOfSets(): any;
     getUri(set: number): any;
     getWeb3(): Web3;

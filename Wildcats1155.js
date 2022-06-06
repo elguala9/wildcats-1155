@@ -43,9 +43,10 @@ exports.Wildcats1155 = void 0;
 var web3_1 = __importDefault(require("web3"));
 var abi_soc_json_1 = __importDefault(require("./abi_soc.json"));
 var abi_par_json_1 = __importDefault(require("./abi_par.json"));
+var node_1 = __importDefault(require("moralis/node"));
 var Wildcats1155 = /** @class */ (function () {
     function Wildcats1155(provider, account, chain_id, collection) {
-        this.GWEI = 1000000000;
+        this.limit = 10;
         if (collection != "SOCIABLE" && collection != "PARTY") {
             throw ("Collection not correct");
         }
@@ -58,6 +59,10 @@ var Wildcats1155 = /** @class */ (function () {
             this.contract_address = "0xB3Bc86fcF1BF1111FCE92348a132FB3621ba0d8A";
         if (collection == "PARTY" && chain_id == "4")
             this.contract_address = "0x1E19A2D2c0a29F536dD8e5d433F824aEA782E75b";
+        if (chain_id == "1")
+            this.chain = "eth";
+        else
+            this.chain = "rinkeby";
         if (this.contract_address == "0x")
             throw ("SmartContract not found");
         this.web3 = new web3_1["default"](provider);
@@ -67,7 +72,99 @@ var Wildcats1155 = /** @class */ (function () {
             this.smart_contract = new this.web3.eth.Contract(abi_soc_json_1["default"], this.contract_address);
         else
             this.smart_contract = new this.web3.eth.Contract(abi_par_json_1["default"], this.contract_address);
+        this.endpoint = { serverUrl: undefined, appId: undefined };
     }
+    Wildcats1155.prototype.setMoralis = function (_serverUrl, _appId) {
+        this.endpoint = { serverUrl: _serverUrl, appId: _appId };
+    };
+    Wildcats1155.prototype.getTransactions = function (seconds, set) {
+        return __awaiter(this, void 0, void 0, function () {
+            var number_of_transaction, transactions, lower_time_limit, i;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        number_of_transaction = 0;
+                        return [4 /*yield*/, this.getAccountTransactions(set)];
+                    case 1:
+                        transactions = _a.sent();
+                        lower_time_limit = new Date().getTime() - seconds * 1000;
+                        //console.log("now : " + lower_time_limit) ;
+                        for (i = 0; i < transactions.length; i++) {
+                            //console.log(transactions.result[i].block_timestamp + " spazio " + (new Date(transactions.result[i].block_timestamp)))
+                            //console.log(new Date(transactions.result[i].block_timestamp).getTime());
+                            if (transactions[i].to_address.toLowerCase() == this.account.toLowerCase()
+                                && transactions[i].from_address != "0x0000000000000000000000000000000000000000"
+                                && new Date(transactions[i].timestamp).getTime() > lower_time_limit)
+                                number_of_transaction++;
+                        }
+                        return [2 /*return*/, number_of_transaction];
+                }
+            });
+        });
+    };
+    Wildcats1155.prototype.getAccountTransactions = function (set) {
+        return __awaiter(this, void 0, void 0, function () {
+            var transactions, filtered_transactions, i;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.getTransactionsRaw()];
+                    case 1:
+                        transactions = _a.sent();
+                        filtered_transactions = new Array();
+                        //console.log("now : " + lower_time_limit) ;
+                        for (i = 0; transactions.result[i] != undefined; i++) {
+                            if ((transactions.result[i].token_address.toLowerCase() == this.contract_address.toLowerCase()
+                                && set == Number(transactions.result[i].token_id))
+                                && (transactions.result[i].to_address.toLowerCase() == this.account.toLowerCase()
+                                    || transactions.result[i].to_address.toLowerCase() == this.account.toLowerCase()))
+                                filtered_transactions.push({ timestamp: transactions.result[i].block_timestamp,
+                                    to_address: transactions.result[i].to_address.toLowerCase(),
+                                    from_address: transactions.result[i].from_address });
+                        }
+                        return [2 /*return*/, filtered_transactions];
+                }
+            });
+        });
+    };
+    Wildcats1155.prototype.getTransactionsRaw = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var number_of_transaction, config, transactions;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (this.endpoint.serverUrl == undefined || this.endpoint.appId == undefined) {
+                            throw ("Endopoint not setted. Call the function setMoralis(serverUrl, appId)");
+                        }
+                        node_1["default"].start(this.endpoint);
+                        number_of_transaction = 0;
+                        config = {
+                            chain: this.chain,
+                            address: this.account,
+                            limit: this.limit
+                        };
+                        return [4 /*yield*/, node_1["default"].Web3API.account.getNFTTransfers(config)];
+                    case 1:
+                        transactions = _a.sent();
+                        node_1["default"].removeAllListeners();
+                        return [2 /*return*/, transactions];
+                }
+            });
+        });
+    };
+    Wildcats1155.prototype.numberOfAccess = function (seconds, set) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _a;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0: return [4 /*yield*/, this.getBalance(set)];
+                    case 1:
+                        _a = (_b.sent());
+                        return [4 /*yield*/, this.getTransactions(seconds, set)];
+                    case 2: return [2 /*return*/, _a - (_b.sent())];
+                }
+            });
+        });
+    };
     Wildcats1155.prototype.getContractAddress = function () {
         return this.contract_address;
     };
@@ -84,8 +181,8 @@ var Wildcats1155 = /** @class */ (function () {
             });
         });
     };
-    Wildcats1155.prototype.getBalanceOf = function (address, set) {
-        return this.smart_contract.methods.balanceOf(address, set).call();
+    Wildcats1155.prototype.getBalance = function (set) {
+        return this.smart_contract.methods.balanceOf(this.account, set).call();
     };
     Wildcats1155.prototype.getNumberOfSets = function () {
         return this.smart_contract.methods.sets().call();
@@ -166,7 +263,7 @@ var Wildcats1155 = /** @class */ (function () {
                         if (!(set < number_of_sets)) return [3 /*break*/, 5];
                         _a = nfts;
                         _b = set;
-                        return [4 /*yield*/, this.getBalanceOf(this._getAddress(args), set)];
+                        return [4 /*yield*/, this.getBalance(set)];
                     case 3:
                         _a[_b] = _c.sent();
                         _c.label = 4;

@@ -17,3 +17,6 @@ sociable.mint(set, amount); // minting function. It is the same for Sociable and
 
 ### get the ntfs owned by the account
 sociable.nftsOwned(); // return an array. The index of the array is the set, the value is the number of NFTs owned
+
+### Moralis
+before using the methods: getTransactions(), getAccountTransactions(), getTransactionsRaw() or numberOfAccess(). Call the method setMoralis().
