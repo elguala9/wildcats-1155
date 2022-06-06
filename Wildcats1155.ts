@@ -59,7 +59,7 @@ export class Wildcats1155{
       else
         this.smart_contract = new this.web3.eth.Contract(ABI_PAR as AbiItem[], this.contract_address);
 
-      this.endpoint = {serverUrl: undefined, appId : undefined};
+      this.endpoint = {serverUrl: "undefined", appId : "undefined"};
     }
 
     public setMoralis(_serverUrl : string, _appId : string){
@@ -107,7 +107,7 @@ export class Wildcats1155{
 
 
     public async getTransactionsRaw(){
-      if(this.endpoint.serverUrl == undefined || this.endpoint.appId == undefined){
+      if(this.endpoint.serverUrl == "undefined" || this.endpoint.appId == "undefined"){
         throw("Endopoint not setted. Call the function setMoralis(serverUrl, appId)");
       }
 

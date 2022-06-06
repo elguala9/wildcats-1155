@@ -72,7 +72,7 @@ var Wildcats1155 = /** @class */ (function () {
             this.smart_contract = new this.web3.eth.Contract(abi_soc_json_1["default"], this.contract_address);
         else
             this.smart_contract = new this.web3.eth.Contract(abi_par_json_1["default"], this.contract_address);
-        this.endpoint = { serverUrl: undefined, appId: undefined };
+        this.endpoint = { serverUrl: "undefined", appId: "undefined" };
     }
     Wildcats1155.prototype.setMoralis = function (_serverUrl, _appId) {
         this.endpoint = { serverUrl: _serverUrl, appId: _appId };
@@ -132,7 +132,7 @@ var Wildcats1155 = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        if (this.endpoint.serverUrl == undefined || this.endpoint.appId == undefined) {
+                        if (this.endpoint.serverUrl == "undefined" || this.endpoint.appId == "undefined") {
                             throw ("Endopoint not setted. Call the function setMoralis(serverUrl, appId)");
                         }
                         node_1["default"].start(this.endpoint);
