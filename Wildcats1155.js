@@ -46,7 +46,7 @@ var abi_par_json_1 = __importDefault(require("./abi_par.json"));
 var node_1 = __importDefault(require("moralis/node"));
 var Wildcats1155 = /** @class */ (function () {
     function Wildcats1155(provider, account, chain_id, collection) {
-        this.limit = 10;
+        this.limit = 100;
         this.null_address = "0x0000000000000000000000000000000000000000";
         if (collection != "SOCIABLE" && collection != "PARTY") {
             throw ("Collection not correct");
@@ -104,14 +104,14 @@ var Wildcats1155 = /** @class */ (function () {
         });
     };
     Wildcats1155.prototype.getAccountTransactions = function (set) {
-        var _a;
+        var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var transactions, filtered_transactions, i;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0: return [4 /*yield*/, this.getTransactionsRaw()];
                     case 1:
-                        transactions = _b.sent();
+                        transactions = _c.sent();
                         filtered_transactions = new Array();
                         //console.log("now : " + lower_time_limit) ;
                         for (i = 0; transactions.result[i] != undefined; i++) {
@@ -120,7 +120,7 @@ var Wildcats1155 = /** @class */ (function () {
                                 && (transactions.result[i].to_address.toLowerCase() == this.account.toLowerCase()
                                     || transactions.result[i].to_address.toLowerCase() == this.account.toLowerCase()))
                                 filtered_transactions.push({ timestamp: transactions.result[i].block_timestamp,
-                                    to_address: transactions.result[i].to_address.toLowerCase(), from_address: (_a = transactions.result[i].from_address.toLowerCase()) !== null && _a !== void 0 ? _a : this.null_address });
+                                    to_address: transactions.result[i].to_address.toLowerCase(), from_address: (_b = (_a = transactions.result[i].from_address) === null || _a === void 0 ? void 0 : _a.toLowerCase()) !== null && _b !== void 0 ? _b : this.null_address });
                         }
                         return [2 /*return*/, filtered_transactions];
                 }
