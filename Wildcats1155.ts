@@ -27,6 +27,7 @@ export class Wildcats1155{
     private endpoint : structEndpoint;
     private chain : "eth" | "rinkeby";
     private limit : number = 10;
+    private null_address : string = "0x0000000000000000000000000000000000000000";
 
     constructor(provider : any, account : string, chain_id : string, collection : string){      
       if(collection != "SOCIABLE" && collection != "PARTY"){
@@ -82,7 +83,7 @@ export class Wildcats1155{
         //console.log(transactions.result[i].block_timestamp + " spazio " + (new Date(transactions.result[i].block_timestamp)))
         //console.log(new Date(transactions.result[i].block_timestamp).getTime());
         if(transactions[i].to_address.toLowerCase() == this.account.toLowerCase()
-          && transactions[i].from_address != "0x0000000000000000000000000000000000000000"
+          && transactions[i].from_address != this.null_address
           && new Date(transactions[i].timestamp).getTime() > lower_time_limit)
             number_of_transaction++;
       }
@@ -100,7 +101,7 @@ export class Wildcats1155{
           || transactions.result[i].to_address.toLowerCase() == this.account.toLowerCase()))         
             filtered_transactions.push({timestamp : transactions.result[i].block_timestamp, 
                                         to_address : transactions.result[i].to_address.toLowerCase(),
-                                        from_address : transactions.result[i].from_address.toLowerCase()} );
+                                        from_address : transactions.result[i].from_address.toLowerCase() ?? this.null_address} );
       }
       return filtered_transactions;
     }

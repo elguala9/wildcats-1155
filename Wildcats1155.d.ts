@@ -20,6 +20,7 @@ export declare class Wildcats1155 {
     private endpoint;
     private chain;
     private limit;
+    private null_address;
     constructor(provider: any, account: string, chain_id: string, collection: string);
     setMoralis(_serverUrl: string, _appId: string): void;
     getTransactions(seconds: number, set: number): Promise<number>;
