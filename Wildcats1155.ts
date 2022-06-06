@@ -100,7 +100,7 @@ export class Wildcats1155{
           || transactions.result[i].to_address.toLowerCase() == this.account.toLowerCase()))         
             filtered_transactions.push({timestamp : transactions.result[i].block_timestamp, 
                                         to_address : transactions.result[i].to_address.toLowerCase(),
-                                        from_address : transactions.result[i].from_address} );
+                                        from_address : transactions.result[i].from_address.toLowerCase()} );
       }
       return filtered_transactions;
     }
