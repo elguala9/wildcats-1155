@@ -245,7 +245,7 @@ export class Wildcats1155{
       
       switch(this.collection){
         case "SOCIABLE" :
-          this.smart_contract.methods
+          return await this.smart_contract.methods
           .mintSociable(set, amount)
           .send(config)
           .once("error", (err : any) => {
@@ -259,7 +259,7 @@ export class Wildcats1155{
         break;
       //-------------
         case "PARTY" :
-          this.smart_contract.methods
+          return await this.smart_contract.methods
           .mintParty(set, amount)
           .send(config)
           .once("error", (err : any) => {
