@@ -248,11 +248,11 @@ export class Wildcats1155{
           return await this.smart_contract.methods
           .mintSociable(set, amount)
           .send(config)
-          /*.once("error", (err : any) => {
+          .once("error", (err : any) => {
             console.log(err);
             //throw(err);
             return "Sorry, something went wrong please try again later.";
-          })*/
+          })
           .then((receipt : any) => {
             console.log(receipt.blockHash);
             return receipt.blockHash;
@@ -263,11 +263,11 @@ export class Wildcats1155{
           return await this.smart_contract.methods
           .mintParty(set, amount)
           .send(config)
-          /*.once("error", (err : any) => {
+          .once("error", (err : any) => {
             console.log(err);
             //throw(err);
             return "Sorry, something went wrong please try again later.";
-          })*/
+          })
           .then((receipt : any) => {
             console.log(receipt.blockHash);
             return receipt.blockHash;
