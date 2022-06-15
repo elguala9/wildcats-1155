@@ -250,7 +250,8 @@ export class Wildcats1155{
           .send(config)
           .once("error", (err : any) => {
             console.log(err);
-            return "Sorry, something went wrong please try again later.";
+            throw(err);
+            //return "Sorry, something went wrong please try again later.";
           })
           .then((receipt : any) => {
             console.log(receipt.blockHash);
@@ -264,6 +265,7 @@ export class Wildcats1155{
           .send(config)
           .once("error", (err : any) => {
             console.log(err);
+            throw(err);
             return "Sorry, something went wrong please try again later.";
           })
           .then((receipt : any) => {
