@@ -296,53 +296,53 @@ var Wildcats1155 = /** @class */ (function () {
     };
     Wildcats1155.prototype.mint = function (set, amount) {
         return __awaiter(this, void 0, void 0, function () {
-            var config;
-            var _a;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
+            var config, _a;
+            var _b;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        _a = {
+                        _b = {
                             //gas: (await this.getEstimatedGas(set, amount))*1.20 ,
                             //gasPrice: await this.getGasPrice(),
                             from: this.account
                         };
                         return [4 /*yield*/, this.getPrice(set)];
                     case 1:
-                        config = (_a.value = ((_b.sent()) * amount),
-                            _a);
-                        switch (this.collection) {
-                            case "SOCIABLE":
-                                this.smart_contract.methods
-                                    .mintSociable(set, amount)
-                                    .send(config)
-                                    .once("error", function (err) {
-                                    console.log(err);
-                                    return "Sorry, something went wrong please try again later.";
-                                })
-                                    .then(function (receipt) {
-                                    console.log(receipt.blockHash);
-                                    return receipt.blockHash;
-                                });
-                                break;
-                            //-------------
-                            case "PARTY":
-                                this.smart_contract.methods
-                                    .mintParty(set, amount)
-                                    .send(config)
-                                    .once("error", function (err) {
-                                    console.log(err);
-                                    return "Sorry, something went wrong please try again later.";
-                                })
-                                    .then(function (receipt) {
-                                    console.log(receipt.blockHash);
-                                    return receipt.blockHash;
-                                });
-                                break;
-                            default:
-                                throw ("This collection do not exist");
-                                break;
+                        config = (_b.value = ((_c.sent()) * amount),
+                            _b);
+                        _a = this.collection;
+                        switch (_a) {
+                            case "SOCIABLE": return [3 /*break*/, 2];
+                            case "PARTY": return [3 /*break*/, 4];
                         }
-                        return [2 /*return*/];
+                        return [3 /*break*/, 6];
+                    case 2: return [4 /*yield*/, this.smart_contract.methods
+                            .mintSociable(set, amount)
+                            .send(config)
+                            .once("error", function (err) {
+                            console.log(err);
+                            throw (err);
+                            return "Sorry, something went wrong please try again later.";
+                        })
+                            .then(function (receipt) {
+                            console.log(receipt.blockHash);
+                            return receipt.blockHash;
+                        })];
+                    case 3: return [2 /*return*/, _c.sent()];
+                    case 4: return [4 /*yield*/, this.smart_contract.methods
+                            .mintParty(set, amount)
+                            .send(config)
+                            .once("error", function (err) {
+                            console.log(err);
+                            throw (err);
+                            return "Sorry, something went wrong please try again later.";
+                        })
+                            .then(function (receipt) {
+                            console.log(receipt.blockHash);
+                            return receipt.blockHash;
+                        })];
+                    case 5: return [2 /*return*/, _c.sent()];
+                    case 6: throw ("This collection do not exist");
                 }
             });
         });

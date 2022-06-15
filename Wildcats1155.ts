@@ -250,7 +250,7 @@ export class Wildcats1155{
           .send(config)
           .once("error", (err : any) => {
             console.log(err);
-            //throw(err);
+            throw(err);
             return "Sorry, something went wrong please try again later.";
           })
           .then((receipt : any) => {
@@ -265,7 +265,7 @@ export class Wildcats1155{
           .send(config)
           .once("error", (err : any) => {
             console.log(err);
-            //throw(err);
+            throw(err);
             return "Sorry, something went wrong please try again later.";
           })
           .then((receipt : any) => {
